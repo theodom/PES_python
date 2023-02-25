@@ -10,7 +10,7 @@ def distance_to_hit_target(v0,theta,x_target,y_target):
     x, y = create_bounce(v0,theta)
     x_hit = 0
     prev_hit = 0
-    t = np.linspace(0,10,500)
+    t = np.linspace(0,10,1000)
     for i in range(len(t)):
         
         if y_target - 0.02 < y[i] and y[i] < y_target + 0.02:
