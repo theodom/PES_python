@@ -25,18 +25,18 @@ def create_arc(v0, launch_angle):
     
     return [x,y,vy,t]
 
-def create_plot(x,y):
+def create_plot(x,y,x_target = None,y_target = None):
+    if x_target is None: x_target = 12
+    if y_target is None: y_target = 0.3
     
-    #create_bounce(x,y)
-    #teken een nieuwe parabool met beginparams = eindparams vorige parabool
-    y_max = np.max(y)
+    y_max = np.max(y) #eventueel gebruikt voor hoogte plot in te stellen, afhankelijk van voorkeur, niet verwijderen
     _,ax = plt.subplots()
     plt.xlim(0,20)
     plt.ylim(0,4)
     plt.xlabel("distance in meters")
     plt.ylabel("height in meters")
     plt.title("ball trajectory")
-    rect = patches.Rectangle((12-0.2, 0),0.4,0.3,linewidth=1,edgecolor= 'black',facecolor="none")
+    rect = patches.Rectangle((x_target-0.2, 0),0.4,y_target,linewidth=1,edgecolor= 'black',facecolor="none")
     ax.add_patch(rect)
     ax.plot(x,y,color="red")
     plt.show()

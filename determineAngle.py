@@ -4,14 +4,9 @@ from scipy.optimize import newton
 import scipy.optimize as spo
 import numpy as np
 
-#user inputs:
-v0 = float(input("starting velocity: "))
-launch_angle = float(input("starting angle: "))
 
-x_target = 12
-y_target = 0.3
-
-def angle_to_hit_target(theta):
+def distance_to_hit_target(v0,theta,x_target,y_target):
+    
     x, y = create_bounce(v0,theta)
     x_hit = 0
     prev_hit = 0
@@ -27,32 +22,15 @@ def angle_to_hit_target(theta):
     
     return x_target - x_hit
 
-print("distance: ", angle_to_hit_target(launch_angle))   
-
-def second_try_optimisation():
+def optimise_angle(v0,x_target,y_target):
     
-    for theta in range(0,90,0.5):
-        #x,y : create_bounce(v0,theta)
-        distance = angle_to_hit_target(theta)
-        if math.abs(distance) < 0.2:
+    for i in range(0,180):
+        theta = i/2
+        distance = distance_to_hit_target(v0,theta,x_target,y_target)
+        if abs(distance) < 0.1:
             return theta
-    return "failed"
+    return None
 
-print("theta: ", second_try_optimisation())
-
-#result = spo.minimize(angle_to_hit_target, 30)
-#result = spo.differential_evolution(angle_to_hit_target, bounds=[(1,90)])
-
-# if result.success:
-#     print(f"x= {result.x} y = {result.fun}")
-# else:
-#     print("failure \n",result)
-
-x_guess, y_guess= create_bounce(v0,launch_angle)
-create_plot(x_guess,y_guess)
-#print("res x= ",result.x)
-# x, y = create_bounce(v0,result.x)
-# create_plot(x,y)
 
 
 #bronvermelding spo.minimize: https://www.youtube.com/watch?v=G0yP_TM-oag
