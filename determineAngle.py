@@ -29,7 +29,16 @@ def angle_to_hit_target(theta):
 
 print("distance: ", angle_to_hit_target(launch_angle))   
 
+def second_try_optimisation():
+    
+    for theta in range(0,90,0.5):
+        #x,y : create_bounce(v0,theta)
+        distance = angle_to_hit_target(theta)
+        if math.abs(distance) < 0.2:
+            return theta
+    return "failed"
 
+print("theta: ", second_try_optimisation())
 
 #result = spo.minimize(angle_to_hit_target, 30)
 #result = spo.differential_evolution(angle_to_hit_target, bounds=[(1,90)])
