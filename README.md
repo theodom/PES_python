@@ -1,2 +1,2 @@
 # PES_python
-fysisch model voor PES project bierton
+fysisch model voor PES project bierpong
