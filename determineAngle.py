@@ -13,7 +13,7 @@ def distance_to_hit_target(v0,theta,x_target,y_target):
     t = np.linspace(0,10,500)
     for i in range(len(t)):
         
-        if y_target - 0.02 < y[i] and y[i] < y_target + 0.2:
+        if y_target - 0.02 < y[i] and y[i] < y_target + 0.02:
             prev_hit = x_hit
             x_hit = x[i]
         if x_hit > x_target: 
@@ -24,10 +24,10 @@ def distance_to_hit_target(v0,theta,x_target,y_target):
 
 def optimise_angle(v0,x_target,y_target):
     
-    for i in range(0,180):
-        theta = i/2
+    for i in range(0,360):
+        theta = i/4
         distance = distance_to_hit_target(v0,theta,x_target,y_target)
-        if abs(distance) < 0.1:
+        if abs(distance) < 0.02:
             return theta
     return None
 
