@@ -45,6 +45,5 @@ create_plot(x_guess,y_guess)
 # x, y = create_bounce(v0,result.x)
 # create_plot(x,y)
 
-#github test
 
 #bronvermelding spo.minimize: https://www.youtube.com/watch?v=G0yP_TM-oag
