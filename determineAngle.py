@@ -17,20 +17,28 @@ def distance_to_hit_target(v0,theta,x_target,y_target):
             prev_hit = x_hit
             x_hit = x[i]
         if x_hit > x_target: 
-            x_hit = prev_hit
+            #x_hit = prev_hit
+            print("hit: ",x_hit)
             break
     
     return x_target - x_hit
 
-def optimise_angle(v0,x_target,y_target):
+def optimise_angle(v0,x_target,y_target, list= None):
     
-    for i in range(0,360):
-        theta = i/4
+    for i in range(0,720):
+        theta = float(i/8)
+        print("theta try: ",theta)
         distance = distance_to_hit_target(v0,theta,x_target,y_target)
+        
         if abs(distance) < 0.02:
+            if list is not None: list.append(theta)
             return theta
-    return None
+    if list is not None:
+        print("list; ",list)
+    exit("Cannot launch at the specified speed, exiting program")
+    
 
 
 
-#bronvermelding spo.minimize: https://www.youtube.com/watch?v=G0yP_TM-oag
+#te bekijken: spo.minimize: https://www.youtube.com/watch?v=G0yP_TM-oa
+# ^ lokaal minimum, evt beter zoeken op globaal minimum
