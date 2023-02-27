@@ -18,9 +18,10 @@ def create_arc(v0, launch_angle):
     vx0 = v0*math.cos(launch_angle)
     vy0 = v0*math.sin(launch_angle)
 
-    x = vx0 * t - AIR_RESISTANCE * t **2
+    x = vx0 * t - 0.5 * AIR_RESISTANCE * t **2
     
     y = vy0 * t - 0.5 * g * t**2
+    
     vy = vy0 - g * t
     
     return [x,y,vy,t]
