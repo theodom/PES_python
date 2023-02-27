@@ -6,7 +6,7 @@ import matplotlib.patches as patches
 #constants
 g = 9.81 #zwaarteveldsterkte
 m = 0.5
-AIR_RESISTANCE = 0.2
+AIR_RESISTANCE = 0
 BOUNCE_RESTITUTION_COEFFICIENT = 0.82
 
 #ideal constraints are 61.15° / 28° for v0 = 10 m/s
