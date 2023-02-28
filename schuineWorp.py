@@ -35,7 +35,7 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
     plt.xlabel("distance in meters")
     plt.ylabel("height in meters")
     plt.title("ball trajectory")
-    rect = patches.Rectangle((x_target-0.2, 0),0.4,y_target,linewidth=1,edgecolor= 'black',facecolor="none")
+    rect = patches.Rectangle((x_target-0.1, 0),0.2,y_target,linewidth=1,edgecolor= 'black',facecolor="none")
     ax.add_patch(rect)
     ax.plot(x,y,color="blue")
     if (type(x_guess) and type(y_guess)) is not None:
