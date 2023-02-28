@@ -6,10 +6,10 @@ from determineAngle import optimize
 
 v0 = float(input("geef de beginsnelheid in: "))
 #manual_angle = float(input("manuele hoek: "))
-xt = float(input("afstand tot doel: "))
-yt = float(input("hoogte van het doel: "))
-# xt = 12
-# yt = 0.3
+#xt = float(input("afstand tot doel: "))
+#yt = float(input("hoogte van het doel: "))
+xt = 12
+yt = 0.3
 
 
 
