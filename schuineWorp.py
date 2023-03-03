@@ -56,7 +56,7 @@ def create_bounce(v0,launch_angle):
         y_new = new_vy0 * t - 0.5 * g * t ** 2
         bounce_index = np.where(t == bounce_time)[0][0]
         for i in range(i_new,len(t)):
-            y[i] = y_new[i-bounce_index]
+            y[i] = max(0,y_new[i-bounce_index])
         
     return [x, y]
 
