@@ -8,7 +8,7 @@ yt = 0.3
 
 
 launch_angle = optimize(v0,xt,yt)
-
+#launch_angle = 30
 #visualiseer
 x,y = create_bounce(v0,launch_angle)
 x_g, y_g = create_bounce(v0,45)

@@ -7,10 +7,16 @@ import matplotlib.patches as patches
 g = 9.81 #zwaarteveldsterkte
 m = 0.5
 AIR_RESISTANCE = 0
-BOUNCE_RESTITUTION_COEFFICIENT = 0.82
+BOUNCE_RESTITUTION_COEFFICIENT = 0.63
 
-#ideal constraints are 61.15° / 28° for v0 = 10 m/s
-
+"""
+    @param v0: initial velocity of a the projectile
+    @param launch_angle: angle at which the projectile is launched
+    
+    creates a single parabolic curve for movement of a projectile
+    
+    @return x, y, vy, t: returns arrays for x movement, y movement, vertical y velocity and linspace t
+"""
 def create_arc(v0, launch_angle):
     t = np.linspace(0, 10, 1000) # time in ms
     launch_angle = math.radians(launch_angle)
@@ -26,6 +32,49 @@ def create_arc(v0, launch_angle):
     
     return [x,y,vy,t]
 
+
+"""
+    @param v0: initial velocity of a the projectile
+    @param launch_angle: the angle at which the projectile is launched
+    
+    creates the full trajectory of a projectile with bounce
+    
+    @return x, y: returns arrays for x position, y position in function of t (time)
+"""
+def create_bounce(v0,launch_angle):
+    new_vy0 = None
+    x, y, vy, t = create_arc(v0, launch_angle)
+    for i in range(len(t)):
+        if y[i] < 0.02 and x[i] > 0.02:
+            new_vy0 = - BOUNCE_RESTITUTION_COEFFICIENT * vy[i] 
+            new_vx0 = BOUNCE_RESTITUTION_COEFFICIENT * v0*math.cos(launch_angle)
+            bounce_time = t[i]
+            i_new = i 
+            break
+    if new_vy0 is not None:
+
+        y_new = new_vy0 * t - 0.5 * g * t ** 2
+        x_new = x[i_new] + new_vx0 * t - 0.5 * AIR_RESISTANCE * t **2
+        bounce_index = np.where(t == bounce_time)[0][0]
+        for i in range(i_new,len(t)):
+            y[i] = max(0,y_new[i-bounce_index])
+            #x[i] = x_new[i-bounce_index]
+    #print(x)
+    return [x, y]
+
+
+"""
+    @param x: 1D array with horizontal position
+    @param y: 1D array with vertical position
+    @param x_guess: compare trajectory with guess, None by default
+    @param y_guess: compare trajectory with guess, None by default
+    @param x_target: distance of start x to target
+    @param y_target: height of target
+    
+    plots the given arrays in an xy-plane
+    
+    @return
+"""
 def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3):
     
     y_max = np.max(y) #eventueel gebruikt voor hoogte plot in te stellen, afhankelijk van voorkeur, niet verwijderen
@@ -42,30 +91,3 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
         ax.plot(x_guess,y_guess, color="red")
     plt.show()
     return
-
-def create_bounce(v0,launch_angle):
-    new_vy0 = None
-    x, y, vy, t = create_arc(v0, launch_angle)
-    for i in range(len(t)):
-        if y[i] < 0.02 and x[i] > 0.02:
-            new_vy0 = - BOUNCE_RESTITUTION_COEFFICIENT * vy[i] 
-            bounce_time = t[i]
-            i_new = i 
-            break
-    if new_vy0 is not None:
-        y_new = new_vy0 * t - 0.5 * g * t ** 2
-        bounce_index = np.where(t == bounce_time)[0][0]
-        for i in range(i_new,len(t)):
-            y[i] = max(0,y_new[i-bounce_index])
-        
-    return [x, y]
-
-
-
-#example code: non-active for imports in other files
-#v0 = float(input("begin velocity (m/s): "))
-#launch_angle = float(input("launch angle in degrees: ")); launch_angle = math.radians(launch_angle)
-#x, y = create_bounce(v0,launch_angle)
-#create_plot(x,y)
-
-

@@ -5,15 +5,21 @@ import numpy as np
 
 def optimize(v_0,x_target = 12, y_target = 0.3):
     possible_thetas = dict()
-    for i in range(360):
+    for i in range(720):
         theta = float(i/8)
         x,y = create_bounce(v_0,theta)
         distance = determine_distance(x,y,x_target,y_target)
         possible_thetas[theta] = abs(distance)
     
     best_angle = min(possible_thetas, key= lambda k: possible_thetas[k])
+    
+    
     print("best angle: ",best_angle)
     print("distance: ",possible_thetas[best_angle])
+    while len(possible_thetas) > 10:
+        possible_thetas.pop(max(possible_thetas, key= lambda k: possible_thetas[k]))
+    
+    print("10 best closest: ",possible_thetas)
     return best_angle
 
 
@@ -28,5 +34,4 @@ def determine_distance(x,y,x_target,y_target):
             break
     x_hit = x[len(t)-index-1]
 
-    
     return x_target - x_hit
