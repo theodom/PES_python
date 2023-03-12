@@ -10,12 +10,10 @@ def find_compression(v0,theta):
     x_val = x_sol.subs(k,k_val)
     return x_val 
 
-def find_elongation(v0,theta,k = 700, m = 0.050):
-    x = math.sqrt(m/(2*k))*v0
-    n = 2 #aantal veren
-    l0 = 0.07 #startlengte veer in meter
+def find_elongation(v0,theta,k = 700, m = 0.050, n = 1):
+    #x = math.sqrt(m/(2*k))*v0
     x = sym.symbols("x")
-    f = n*k/2 * ((x**2)-l0**2) - m * g * x * math.sin(theta*math.pi/180) - m/2 * v0**2
+    f = n*k/2 * ((x**2)) - m * g * x * math.sin(theta*math.pi/180) - m/2 * v0**2
     sol = sym.solve(f, x)
     print('solution: ',x)
-    return sol
+    return sol[-1]

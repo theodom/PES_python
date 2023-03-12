@@ -3,6 +3,14 @@ import math
 import numpy as np
 
 
+
+"""
+    @param v_0: starting velocity of the projectile ()
+    @param x_target: straight line distance to target, 12 m by default
+    @param y_target: height of the target, 0.3 m by default
+    
+    @return best_angle: most optimal launch angle for input parameters (in degrees)
+"""
 def optimize(v_0,x_target = 12, y_target = 0.3):
     possible_thetas = dict()
     for i in range(720):

@@ -40,7 +40,7 @@ def create_arc(v0, launch_angle):
     
     creates the full trajectory of a projectile with bounce
     
-    @return x, y: returns arrays for x position, y position in function of t (time)
+    @return x, y: returns arrays for x position, y position in function of t (linspace representing time)
 """
 def create_bounce(v0,launch_angle):
     new_vy0 = None
@@ -69,8 +69,8 @@ def create_bounce(v0,launch_angle):
     @param y: 1D array with vertical position
     @param x_guess: compare trajectory with guess, None by default
     @param y_guess: compare trajectory with guess, None by default
-    @param x_target: distance of start x to target
-    @param y_target: height of target
+    @param x_target: distance of start x to target, 12 by default
+    @param y_target: height of target, 0.3 by default
     
     plots the given arrays in an xy-plane
     
@@ -81,7 +81,7 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
     y_max = np.max(y) #eventueel gebruikt voor hoogte plot in te stellen, afhankelijk van voorkeur, niet verwijderen
     _,ax = plt.subplots()
     plt.xlim(0,15)
-    plt.ylim(0,y_max+2)
+    plt.ylim(0,4.5)
     plt.xlabel("horizontale afstand (m)")
     plt.ylabel("hoogte (m)")
     #plt.title("ball trajectory")
