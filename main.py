@@ -22,7 +22,7 @@ launch_angle = optimize(v0,xt,yt)
 x,y = create_bounce(v0,launch_angle)
 x_g, y_g = create_bounce(v0,45)  
 create_plot(x,y,x_guess=x_g, y_guess=y_g,x_target=xt,y_target=yt)
-x = round(find_elongation(9,30,k= 450,n = 2)[1]*100,2)
+x = round(find_elongation(9,30,k= 450,n = 2)*100,2)
 print(x)
 
 print("move the spring",x, "cm backwards.")
