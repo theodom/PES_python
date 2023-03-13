@@ -10,7 +10,6 @@ Tenzij anders aangegeven zijn alle grootheden in SI-eenheden.
 
 #input waarden
 v0 = float(input("geef de beginsnelheid in: "))
-xt = 12
 yt = 0.3
 emmer = float(input("Kies een doelwit (1-6): "))
 xt = emmerLijst[emmer-1]
@@ -22,7 +21,5 @@ launch_angle = optimize(v0,xt,yt)
 x,y = create_bounce(v0,launch_angle)
 x_g, y_g = create_bounce(v0,45)  
 create_plot(x,y,x_guess=x_g, y_guess=y_g,x_target=xt,y_target=yt)
-x = round(find_elongation(9,30,k= 450,n = 2)*100,2)
-print(x)
-
+x = round(find_elongation(v0,launch_angle,k= 450,n = 3)*100,2)
 print("move the spring",x, "cm backwards.")
