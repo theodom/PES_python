@@ -15,5 +15,4 @@ def find_elongation(v0,theta,k = 700, m = 0.050, n = 1):
     x = sym.symbols("x")
     f = n*k/2 * ((x**2)) - m * g * x * math.sin(theta*math.pi/180) - m/2 * v0**2
     sol = sym.solve(f, x)
-    print('solution: ',x)
     return sol[-1]
