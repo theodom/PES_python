@@ -2,7 +2,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from schuineWorp import create_plot
+from simpelModel import create_plot
 
 
 #constants
@@ -102,7 +102,10 @@ def plot_graph(x,y,x_target= 12, y_target = 0.3):
     plt.show()
     return
 
-x, y = create_movement(10,37)
-plot_graph(x,y)
+def optimise_angle(x,y,x_target,y_target):
+    #TODO: optimise launch angle in function of starting velocity
+    bounced = False
 
-
+    
+    
+    return

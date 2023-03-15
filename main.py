@@ -1,4 +1,4 @@
-from schuineWorp import create_bounce, create_plot, get_emmers
+from simpelModel import create_bounce, create_plot, get_emmers
 from determineAngle import optimize
 from launchMechanism import find_compression, find_elongation
 
@@ -11,7 +11,7 @@ Tenzij anders aangegeven zijn alle grootheden in SI-eenheden.
 #input waarden
 v0 = float(input("geef de beginsnelheid in: "))
 yt = 0.3
-emmer = float(input("Kies een doelwit (1-6): "))
+emmer = float(input("Kies een doelwit (1-6): ")-1) 
 xt = emmerLijst[emmer-1]
 
 

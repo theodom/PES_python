@@ -97,11 +97,11 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
 
 def get_emmers():
     lijst = dict()
-    lijst[1] = 11.4035
-    lijst[2] = 11.66735
-    lijst[3] = lijst[2]
-    lijst[4] = 11.875
-    lijst[5] = 12.00
-    lijst[6] = lijst[4]
+    lijst[0] = 11.4035
+    lijst[1] = 11.66735
+    lijst[2] = lijst[1]
+    lijst[3] = 11.875
+    lijst[4] = 12.00
+    lijst[5] = lijst[3]
     
     return lijst

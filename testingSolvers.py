@@ -1,4 +1,4 @@
-from schuineWorp import create_bounce, create_plot
+from simpelModel import create_bounce, create_plot
 import math
 from scipy.optimize import newton
 import scipy.optimize as spo

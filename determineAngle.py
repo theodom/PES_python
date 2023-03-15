@@ -1,4 +1,4 @@
-from schuineWorp import create_bounce
+from simpelModel import create_bounce
 import math
 import numpy as np
 
