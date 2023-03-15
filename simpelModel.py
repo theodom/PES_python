@@ -95,6 +95,7 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
     plt.show()
     return
 
+#lijst met rechte afstanden tot middelpunt van de emmer
 def get_emmers():
     lijst = dict()
     lijst[0] = 11.4035

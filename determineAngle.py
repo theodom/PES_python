@@ -1,5 +1,4 @@
 from simpelModel import create_bounce
-import math
 import numpy as np
 
 
@@ -13,7 +12,7 @@ import numpy as np
 """
 def optimize(v_0,x_target = 12, y_target = 0.3):
     possible_thetas = dict()
-    for i in range(360):
+    for i in range(720):
         theta = float(i/8)
         x,y = create_bounce(v_0,theta)
         distance = determine_distance(x,y,x_target,y_target)

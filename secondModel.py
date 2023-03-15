@@ -84,8 +84,8 @@ def calculate_acceleration(v,theta,omega, m = 0.050, g = 9.81,r_ball = 0.064, rh
     Fm = km * v**2 # kracht tgv magnus effect oftewel spin
 
     #ogenblikkelijke versnelling in x en y
-    ax = - (Fd + Fm)*math.cos(theta)
-    ay = - g - (Fd + Fm)*math.sin(theta)
+    ax = - (Fd + Fm)*math.cos(theta)/m
+    ay = - g - (Fd + Fm)/m*math.sin(theta)
     
     return ax, ay
 
