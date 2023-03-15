@@ -11,7 +11,7 @@ Tenzij anders aangegeven zijn alle grootheden in SI-eenheden.
 #input waarden
 v0 = float(input("geef de beginsnelheid in: "))
 yt = 0.3
-emmer = float(input("Kies een doelwit (1-6): ")-1) 
+emmer = int(input("Kies een doelwit (1-6): "))-1 
 xt = emmerLijst[emmer-1]
 
 
