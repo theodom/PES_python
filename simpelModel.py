@@ -59,7 +59,6 @@ def create_bounce(v0,launch_angle):
         bounce_index = np.where(t == bounce_time)[0][0]
         for i in range(i_new,len(t)):
             y[i] = max(0,y_new[i-bounce_index])
-            #x[i] = x_new[i-bounce_index]
     #print(x)
     return [x, y]
 
@@ -84,7 +83,7 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
     plt.ylim(0,4.5)
     plt.xlabel("horizontale afstand (m)")
     plt.ylabel("hoogte (m)")
-    #plt.title("ball trajectory")
+    plt.title("ball trajectory")
     rect = patches.Rectangle((x_target-0.1, 0),0.2,y_target,linewidth=1,edgecolor= 'black',facecolor="none")
     ax.add_patch(rect)
     if (type(x_guess) and type(y_guess)) is not None:

@@ -22,11 +22,8 @@ def optimize(v_0,x_target = 12, y_target = 0.3):
     
     
     print("best angle: ",best_angle)
-    print("distance: ",possible_thetas[best_angle])
     while len(possible_thetas) > 10:
         possible_thetas.pop(max(possible_thetas, key= lambda k: possible_thetas[k]))
-    
-    print("10 best closest: ",possible_thetas)
     return best_angle
 
 
