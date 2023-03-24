@@ -8,24 +8,25 @@ from simpelModel import create_plot
 #constants
 g = 9.81 #zwaarteveldsterkte
 AIR_RESISTANCE = 0
-BOUNCE_RESTITUTION_COEFFICIENT = 0.59
+RESTITUTION_X = 0.59 # OPNIEUW VERIFIEREN
+RESTITUTION_Y = 0.814  # NOG TE TESTEN
+TIME = 4 #Aantal te simuleren seconden
 
 def create_movement(v0, launch_angle, x0 = 0, y0 = 0,r_ball=0.064):
-    time = 4 #Aantal te simuleren seconden
-    t = np.linspace(0,time,1000*time) #creërt linspace met interval 1 ms
+   
+    t = np.linspace(0,TIME,1000*TIME) #creërt linspace met interval 1 ms
     
     launch_angle = math.radians(launch_angle) #te lanceren hoek, in graden ingegeven, hier omgezet naar radialen
     
-    omega = v0/r_ball*0 #hoesknelheid van de bal bij lanceren (rad/s)
-    
-    bounce_counter = 0 
+    omega = 0 #hoesknelheid van de bal bij lanceren (rad/s)
+
     
     #maakt numpy arrays voor x,y, vx, vy.
     #zogezegd efficienter dan python lists
-    x = np.zeros(1000*time) 
-    y = np.zeros(1000*time)
-    vx = np.zeros(1000*time)
-    vy = np.zeros(1000*time)
+    x = np.zeros(1000*TIME) 
+    y = np.zeros(1000*TIME)
+    vx = np.zeros(1000*TIME)
+    vy = np.zeros(1000*TIME)
     
     #vul beginvoorwaarden in, nodig om bv hoek te bepalen
     x[0] = x0 # in meter
@@ -34,6 +35,7 @@ def create_movement(v0, launch_angle, x0 = 0, y0 = 0,r_ball=0.064):
     vy[0] = v0 * math.sin(launch_angle) # idem
     
     #itereert over het gehele tijds interval, beginnend op t0+1
+    bounce_counter = 0 
     for i in range(1,len(t)):
         v = math.sqrt((vx[i-1])**2 + (vy[i-1])**2)
         if not (vx[i-1] and vy[i-1]) == 0:
@@ -43,20 +45,19 @@ def create_movement(v0, launch_angle, x0 = 0, y0 = 0,r_ball=0.064):
         #indien de bal (onderkant) onder 0 gaat in verticale richting, is hij aan het botsen
         #en moet de snelheid dus omgekeerd worden
         if y[i-1] < 0:
-            bounce_counter += 1
             #stopt simulatie bij 2e botsing
             #enkel visueel handig, vermijd oneindige botsingen nadat de bal toch
             #in de emmer is beland (of ernaast), hoe dan ook is alles wat verder gebeurt niet nuttig
-            if bounce_counter > 1: 
-                vx[i] = 0
+            if bounce_counter >= 1: 
+                #vx[i] = 0
                 vy[i] = 0
-           
             else:
                 #verminderd snelheden met de restitutie coeffecient
                 #experimenteel is ondervonden dat deze dezelfde is voor x en y
-                vx[i] = BOUNCE_RESTITUTION_COEFFICIENT * abs(vx[i-1])
-                vy[i] = BOUNCE_RESTITUTION_COEFFICIENT * abs(vy[i-1])
+                vx[i] = RESTITUTION_X * abs(vx[i-1])
+                vy[i] = RESTITUTION_Y * abs(vy[i-1])
                 y[i-1] = 0
+                bounce_counter += 1
         else: 
             vx[i] = vx[i-1] + ax*t[1]
             vy[i] = vy[i-1] + ay*t[1]
@@ -79,6 +80,7 @@ def calculate_acceleration(v,theta,omega, m = 0.050, g = 9.81,r_ball = 0.064, rh
         km = 0
     else: 
         km =  ku* omega*r_ball/(2*v) * (math.pi*r_ball**2)*rho
+        km = 0.0003
 
     Fd = kd * v**2 # kracht tgv luchtweerstand
     Fm = km * v**2 # kracht tgv magnus effect oftewel spin
@@ -102,10 +104,30 @@ def plot_graph(x,y,x_target= 12, y_target = 0.3):
     plt.show()
     return
 
-def optimise_angle(x,y,x_target,y_target):
+def determine_distance(x,y,x_target,y_target,theta):
     #TODO: optimise launch angle in function of starting velocity
     bounced = False
+    t = np.linspace(0,TIME,1000*TIME)
+    for i in range (len(t)):
+        if y_target - 0.01 < y[-i] and y[-i] < y_target + 0.01:
+            bounced = True
+        
+        if bounced == True:
+            print("x: ",x[-i] , " ; y: ",y[-i], "; theta: ",theta, " d: ",x_target-x[-i])
+            return x_target - x[-i]
+    return x_target
 
-    
-    
-    return
+def optimise_angle(v0,x_target,y_target):
+    theta_distance = dict()
+    for i in range(1,360):
+        theta = float(i/4)
+        x,y = create_movement(v0,theta)
+        distance = determine_distance(x,y,x_target,y_target,theta)
+        
+        theta_distance[theta] = distance
+    best_angle = min(theta_distance, key= lambda k: theta_distance[k])
+    while len(theta_distance) > 10:
+        theta_distance.pop(max(theta_distance, key= lambda k: theta_distance[k]))
+    print("angles: ",theta_distance)
+    return best_angle
+        

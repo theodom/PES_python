@@ -87,9 +87,8 @@ def create_plot(x,y,x_guess = None, y_guess = None, x_target = 12,y_target = 0.3
     rect = patches.Rectangle((x_target-0.1, 0),0.2,y_target,linewidth=1,edgecolor= 'black',facecolor="none")
     ax.add_patch(rect)
     if (type(x_guess) and type(y_guess)) is not None:
-        ax.plot(x_guess,y_guess, color="white")
+        ax.plot(x_guess,y_guess, color="red")
     ax.plot(x,y,color="blue")
-    print("type x: ",type(x_guess))
     
     plt.show()
     return
