@@ -8,8 +8,8 @@ from simpelModel import create_plot
 #constants
 g = 9.81 #zwaarteveldsterkte
 AIR_RESISTANCE = 0
-RESTITUTION_X = 0.59 # OPNIEUW VERIFIEREN
-RESTITUTION_Y = 0.814  # NOG TE TESTEN
+RESTITUTION_X = 0.59 
+RESTITUTION_Y = 0.814  
 TIME = 4 #Aantal te simuleren seconden
 
 def create_movement(v0, launch_angle, x0 = 0, y0 = 0,r_ball=0.064):
@@ -125,6 +125,9 @@ def optimise_angle(v0,x_target,y_target):
         distance = determine_distance(x,y,x_target,y_target,theta)
         
         theta_distance[theta] = distance
+    for val in theta_distance:
+        theta_distance[val] = abs(theta_distance[val])
+        
     best_angle = min(theta_distance, key= lambda k: theta_distance[k])
     while len(theta_distance) > 10:
         theta_distance.pop(max(theta_distance, key= lambda k: theta_distance[k]))

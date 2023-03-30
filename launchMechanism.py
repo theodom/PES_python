@@ -2,7 +2,10 @@ import math
 import sympy as sym
 g = 9.81 
 
-#legacy functie, mag weg
+"""
+verouderde, ongebruikte functie, nog niet verwijderd om de vorige generatie te eren
+"standing on the shoulders of giants"
+"""
 def find_compression(v0,theta):
     x, k = sym.symbols("x k")
     f = k*x**2 - 0.981*math.cos(theta)*x - 0.05*81
